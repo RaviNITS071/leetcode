@@ -1,8 +1,33 @@
 class Solution {
 public:
-    int maxProductDifference(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
+    long long maxProductDifference(vector<int>& nums) {
+        int max = 0, secMax = 0;
+        int min  = 10e4, secMin = 10e4;
 
-        return (nums[nums.size()-1] * nums[nums.size()-2] - nums[0]*nums[1]);
+        for(int val : nums){
+            if(val > secMax){
+                if (val > max){
+                    secMax = max;
+                    max = val;
+                }
+                else{
+                    secMax = val;
+                }
+            }
+               
+            
+            if(val < secMin){
+                if(val < min){
+                    secMin = min;
+                    min = val;
+                }
+                else{
+                    secMin = val;
+                }
+            }
+                
+            
+        }
+        return ( max * secMax - min * secMin);
     }
 };
