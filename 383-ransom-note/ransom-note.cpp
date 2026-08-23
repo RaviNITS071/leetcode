@@ -1,20 +1,20 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        unordered_map<char,int> need;
-        unordered_map<char,int> available;
+        int need[26] = {0};
+        int available[26] = {0};
 
-        for(int i : ransomNote){
-            need[i]++;
+        for(char i : ransomNote){
+            need[i - 'a']++;
         }
-        for(int i : magazine){
-            available[i]++;
+        for(char i : magazine){
+            available[i - 'a']++;
         }
 
-        for(auto it : need){
-            char ch = it.first;
-            if(available[ch] < it.second) return false;
+        for(int i = 0; i < 26; i++){
+            if(need[i] > available[i]) return false;
         }
+
         return true;
     }
 };
